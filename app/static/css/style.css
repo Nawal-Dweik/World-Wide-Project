@@ -1,0 +1,31 @@
+.register,
+.login {
+    display: inline-block;
+}
+
+.wrapper {
+    margin-top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 440px;
+    padding: 44px;
+    -moz-box-shadow: 0 2px 6px rgba(0,0,0,.2);
+    box-shadow: 0 2px 6px rgba(0,0,0,.2);
+    background: rgb(243 212 212 / 50%);
+}
+
+body {
+    background: url("/static/background_login_page.jpg") no-repeat fixed;
+    font-family: cursive !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: rgb(15, 82, 153) !important;
+    border-color: #5B84B1FF !important;
+}
+
+img {
+    width: 40%;
+    height: 40%;
+}
