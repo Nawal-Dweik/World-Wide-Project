@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="header">
+        <span class="header-section-1">
+           <h1> Hello, {{request.session.name}}!</h1>
+        </span>
+        <span class="header-section-2"></span>
+        <span class="header-section-3">
+            <a href="/logout">Logout</a>
+        </span>
+
+    </div>
+    
+        <div class="dashboard-content">
+            Your Group schedules
+            <table class="table table-sgrouped">
+                <thead>
+                  <tr>
+                    <th scope="col">Group</th>
+                    <th scope="col">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for group in groups %}
+                  <tr>
+                    <th scope="row"><a href="groups/destination/{{group.id}}">{{group.destination}}</a></th>
+                    <td>{{group.description}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+
+              Other User's group Plan
+              <table class="table table-sgrouped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Admin</th>
+                      <th scope="col">Group</th>
+                      <th scope="col">Do You Want To Join?</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% for otherGroup in otherGroups %}
+                    <tr>
+                      <th scope="row">{{otherGroup.planner.name}}</th>
+                      <th><a href="groups/destination/{{otherGroup.id}}"> {{otherGroup.destination}} </a></th>
+                      <td><a href="/join/{{otherGroup.id}}">Join</a></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+        </div>
+
+
+
+    <div class="header">
+        <span class="header-section-1">
+
+        </span>
+        <span class="header-section-2"></span>
+        <span class="header-section-3">
+            <a href="/groups/add">Add Group</a>
+        </span>
+
+    </div>
+    </div>
+</body>
+
+</html>

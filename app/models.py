@@ -32,5 +32,51 @@ class Message(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+def addMessage(msg_info,user_id):
+    context = msg_info['content']
+    sender_id = User.objects.get(id=user_id)
+    Message.objects.create(context=context,sender_id=sender_id)
+    Message.objects.last()
+    return Message1
 
-   
+
+    ################################################################################################
+
+class Group(models.Model):
+    planner = models.ForeignKey(User, related_name="groupsPlannedByUser", on_delete = models.CASCADE)
+    destination = models.TextField()
+    description = models.TextField()
+    users = models.ManyToManyField(User, related_name="groups")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+def addGroup(postedRequest, currentUserId):
+    destination = postedRequest['destination']
+    description = postedRequest['description']
+    this_user = User.objects.get(id= currentUserId)
+    this_group = Group.objects.create(destination=destination,description=description, planner=this_user)
+    this_user.groups.add(this_group)
+
+def all_groups_for_user(id):
+    this_user = User.objects.get(id=id)
+    groups = this_user.groups.all()
+    return groups
+
+def other_groups(id):
+    this_user = User.objects.get(id=id)
+    otherGroups = Group.objects.exclude(users=this_user)
+    return otherGroups
+
+def join(user_id, group_id):
+    this_user = User.objects.get(id=user_id)
+    this_group = Group.objects.get(id=group_id)
+    this_user.groups.add(this_group)
+
+def selected_group(group_id):
+    group=Group.objects.get(id=group_id)
+    return group
+
+def users_joining_the_group(user_id,group_id):
+    this_group = Group.objects.get(id=group_id)
+    allGroupJoiners = User.objects.filter(groups=this_group)
+    return allGroupJoiners

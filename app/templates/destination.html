@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destination</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="header">
+        <span class="header-section-1">
+        </span>
+        <span class="header-section-2"></span>
+        <span class="header-section-3">
+
+            <a href="/logout">Logout</a>
+            <a href="/groups">Home</a>
+        </span>
+
+    </div>
+
+    <div class="content">
+
+        <div class="show-destination">
+            <h1>{{destination}}</h1>
+            <br />
+            <output>Admin: {{planner}}</output>
+            <br />
+            <output>Description: {{description}}</output>
+
+        </div>
+
+        <div>
+            <h1>Other members in the group</h1>
+
+            {% for groupUser in groupUsers %}
+                {% if groupUser.id != plannerId %}
+            <output>{{groupUser.name}}</output>
+            <br/>
+            {% endif %}
+            {% endfor %}
+
+        </div>
+
+
+
+    </div>
+</body>
+
+</html>

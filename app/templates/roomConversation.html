@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboard_style.css' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+
+    <div class="container">
+        <div class="panel messages-panel">
+            <div class="contacts-list">
+                <div class="inbox-categories">
+                    <div data-toggle="tab" data-target="#inbox" class="active"> Inbox </div>
+
+                </div>
+                <div class="tab-content">
+                    <div id="inbox" class="contacts-outter-wrapper tab-pane active">
+
+                        <div class="contacts-outter">
+                            <ul class="list-unstyled contacts">
+                                <li data-toggle="tab" data-target="#inbox-message-1" class="active">
+                                    <div class="message-count"> 1 </div>
+                                    <img alt="" class="img-circle medium-image"
+                                        src="/static/avatar.jpg">
+
+                                    <div class="vcentered info-combo">
+                                        <h3 class="no-margin-bottom name"> John Doe </h3>
+                                        <h5> Hah, too late, I already bought it and my team is impleting the new design
+                                            right now.</h5>
+                                    </div>
+                                    <div class="contacts-add">
+                                        <span class="message-time"> 2:32 <sup>AM</sup></span>
+                                        <i class="fa fa-trash-o"></i>
+                                        <i class="fa fa-paperclip"></i>
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="tab-content">
+                <div class="tab-pane message-body active" id="inbox-message-1">
+                    <div class="message-top">
+                        <a class="btn btn btn-success new-message"> <i class="fa fa-envelope"></i> New Message </a>
+
+                        <div class="new-message-wrapper">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Send message to...">
+                                <a class="btn btn-danger close-new-message" href="#"><i class="fa fa-times"></i></a>
+                            </div>
+
+                            <div class="chat-footer new-message-textarea">
+                                <textarea class="send-message-text"></textarea>
+                                <label class="upload-file">
+                                    <input type="file" required="">
+                                    <i class="fa fa-paperclip"></i>
+                                </label>
+                                <button type="button" class="send-message-button btn-info"> <i class="fa fa-send"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="message-chat">
+                        <div class="chat-body">
+                            <div class="message info">
+                                <img alt="" class="img-circle medium-image"
+                                    src="/static/avatar.jpg">
+
+                                <div class="message-body">
+                                    <div class="message-info">
+                                        <h4> Elon Musk </h4>
+                                        <h5> <i class="fa fa-clock-o"></i> 2:25 PM </h5>
+                                    </div>
+                                    <hr>
+                                    <div class="message-text">
+                                        I've seen your new template, Dauphin, it's amazing !
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+
+                            <div class="message my-message">
+                              
+
+                                <div class="message-body">
+                                    <div class="message-body-inner">
+                                        <div class="message-info">
+                                            <h4> Dennis Novac </h4>
+                                            <h5> <i class="fa fa-clock-o"></i> 2:28 PM </h5>
+                                        </div>
+                                        <hr>
+                                        <div class="message-text">
+                                            Thanks, I think I will use this for my next dashboard system.
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+
+                            <div class="message info">
+                                <img alt="" class="img-circle medium-image"
+                                    src="/static/avatar.jpg">
+
+                                <div class="message-body">
+                                    <div class="message-info">
+                                        <h4> Elon Musk </h4>
+                                        <h5> <i class="fa fa-clock-o"></i> 2:32 PM </h5>
+                                    </div>
+                                    <hr>
+                                    <div class="message-text">
+                                        Hah, too late, I already bought it and my team is impleting the new design right
+                                        now.
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+
+                        <div class="chat-footer">
+                            <textarea class="send-message-text"></textarea>
+                            <label class="upload-file">
+                                <input type="file" required="">
+                                <i class="fa fa-paperclip"></i>
+                            </label>
+                            <button type="button" class="send-message-button btn-info"> <i class="fa fa-send"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

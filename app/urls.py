@@ -10,5 +10,12 @@ urlpatterns = [
     path('login', views.login),
     path('logout', views.logout),
     path('dashboard', views.dashboard),
+
+    #############################################
+
+    path('groups', views.groupDashboard),
+    path('groups/add', views.addGroup),
+    path('join/<int:group_id>', views.joinGroup),
+    path('groups/destination/<int:group_id>', views.view_destination),
    
 ]
