@@ -82,7 +82,7 @@
                     <tbody>
                         {% for otherGroup in otherGroups %}
                         <tr>
-                            <th scope="row">{{otherGroup.planner.name}}</th>
+                            <th scope="row">{{otherGroup.planner.first_name}}</th>
                             <th><a href="groups/destination/{{otherGroup.id}}"> {{otherGroup.destination}} </a></th>
                             <td><a href="/join/{{otherGroup.id}}">Join</a></td>
                         </tr>

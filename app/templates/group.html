@@ -27,28 +27,32 @@
                         <div class="contacts-outter">
                             <ul class="list-unstyled contacts">
                                 <li data-toggle="tab" data-target="#inbox-message-1" class="active">
-                                    
-                                    <img alt="" class="img-circle medium-image"
-                                        src="/static/admin.JPG">
 
+                                    <img alt="" style="width: 134px;
+                                    height: 134px;
+                                    margin-left: 23%;" class="img-circle medium-image" src="/static/admin.JPG">
+                                    <br />
                                     <div class="vcentered info-combo">
-                                        <h3 class="no-margin-bottom name"> Admin : {{planner}} </h3>
-                                        <h5> Description: <br/>{{description}}</h5>
+                                        <h3  style="margin-left: 48%;font-size: 15px;" class="no-margin-bottom name"> Admin : {{planner}} </h3>
+                                        <div style="font-size: 15px;"> Description: <br />{{description}}</div>
+                                        <br/>
                                     </div>
-                                    <br/>
+                                    <br />
                                     <div>
-                                    <h4> Room Members</h4>
-                                    {% for groupUser in groupUsers %}
-                                    {% if groupUser.id != plannerId %}
-                                <output>{{groupUser.name}}</output>
-                                <br/>
-                                {% endif %}
-                                {% endfor %}
-                    
-                            </div>
-                                   
+                                        <h4> Room Members</h4>
+                                        {% for groupUser in groupUsers %}
+                                        {% if groupUser.id != plannerId %}
+
+                                        <img alt="" class="img-circle medium-image" src="/static/avatar.jpg">
+                                        <output>{{groupUser.first_name}}</output>
+                                        <br />
+                                        {% endif %}
+                                        {% endfor %}
+
+                                    </div>
+
                                 </li>
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -61,7 +65,8 @@
             <div class="tab-content">
                 <div class="tab-pane message-body active" id="inbox-message-1">
                     <div class="message-top">
-                        <a class="btn btn btn-success new-message" href="/groups/add"> <i class="fa fa-envelope"></i> New Room </a>
+                        <a class="btn btn btn-success new-message" href="/groups/add"> <i class="fa fa-envelope"></i>
+                            New Room </a>
 
                         <div class="new-message-wrapper">
                             <div class="form-group">
@@ -84,8 +89,7 @@
                     <div class="message-chat">
                         <div class="chat-body">
                             <div class="message info">
-                                <img alt="" class="img-circle medium-image"
-                                    src="/static/avatar.jpg">
+                                <img alt="" class="img-circle medium-image" src="/static/avatar.jpg">
 
                                 <div class="message-body">
                                     <div class="message-info">
@@ -101,7 +105,7 @@
                             </div>
 
                             <div class="message my-message">
-                              
+
 
                                 <div class="message-body">
                                     <div class="message-body-inner">
@@ -119,8 +123,7 @@
                             </div>
 
                             <div class="message info">
-                                <img alt="" class="img-circle medium-image"
-                                    src="/static/avatar.jpg">
+                                <img alt="" class="img-circle medium-image" src="/static/avatar.jpg">
 
                                 <div class="message-body">
                                     <div class="message-info">
