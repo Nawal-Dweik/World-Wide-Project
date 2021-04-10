@@ -895,3 +895,14 @@ body{
 .contacts li > .info-combo {
    display:inline-block;
 }
+
+.contacts-list .inbox-categories > div {
+  width: 294px; }
+
+.contacts-outter-wrapper:after, .contacts-outter-wrapper:nth-child(1):after {
+    display: none;
+  }
+
+li.active {
+    height: 650px;
+}
