@@ -129,3 +129,12 @@ label {
     border: 2px solid black;
     margin: 5px;
 }
+
+.hero-section {
+    height: 120px !important; 
+    background-image: url(/static/home_part.jpg);
+
+}
+a.w-webflow-badge {
+    display: none !important;
+}

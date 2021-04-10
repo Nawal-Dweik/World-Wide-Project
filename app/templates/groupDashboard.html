@@ -23,131 +23,120 @@
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="{% static 'css/room.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
 
 <body>
     <div>
-        <div data-collapse="tiny" data-animation="over-right" data-duration="400" role="banner" class="navbar w-nav">
-            <div class="w-container">
-                {% load static %}
-                <img src="{% static 'logo.png'%}" alt="logo" width="80px">
-                
-                <nav role="navigation" class="nav-menu w-nav-menu">welcome, </nav>
-                <div class="menu-button w-hidden-main w-hidden-medium w-hidden-small w-clearfix w-nav-button">
-                    <div class="menu-icon w-icon-nav-menu"></div>
-                    <div class="menu-link">MENU</div>
-                </div>
-            </div>
-        </div>
         <div class="hero-section">
-            
+
         </div>
         <div class="category-section">
             <div class="w-container">
                 <div class="w-dyn-list">
                     <div role="list" class="w-clearfix w-dyn-items w-row">
-                        <div role="listitem" class="category-wrapper w-dyn-item w-col w-col-2"><a
-                                href="/groups" class="category-link">Rooms</a></div>
-                        <div role="listitem" class="category-wrapper w-dyn-item w-col w-col-2"><a
-                                href="/groups/add" class="category-link">New Room</a></div>
+                        <div role="listitem" class="category-wrapper w-dyn-item w-col w-col-2"><a href="/groups"
+                                class="category-link">Rooms</a></div>
+                        <div role="listitem" class="category-wrapper w-dyn-item w-col w-col-2"><a href="/groups/add"
+                                class="category-link">New Room</a></div>
+                        <div role="list" class="w-clearfix w-dyn-items w-row">
+                            <div class="category-wrapper w-dyn-item w-col w-col-2"
+                                style="white-space: nowrap; padding-left: 50%;"><img src="{% static 'logo.png'%}"
+                                    alt="logo" width="40px" style="max-width: none;"> Welcome, {{request.session.name}}
+                                !</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div id="posts" class="main-section bottom-padding">
-          <div class="dashboard-content">
-            Your Group schedules
-            <table class="table table-sgrouped">
-                <thead>
-                  <tr>
-                    <th scope="col">Group</th>
-                    <th scope="col">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {% for group in groups %}
-                  <tr>
-                    <th scope="row"><a href="groups/destination/{{group.id}}">{{group.destination}}</a></th>
-                    <td>{{group.description}}</td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-
-
-              Other User's group Plan
-              <table class="table table-sgrouped">
-                  <thead>
-                    <tr>
-                      <th scope="col">Admin</th>
-                      <th scope="col">Group</th>
-                      <th scope="col">Do You Want To Join?</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                      {% for otherGroup in otherGroups %}
-                    <tr>
-                      <th scope="row">{{otherGroup.planner.name}}</th>
-                      <th><a href="groups/destination/{{otherGroup.id}}"> {{otherGroup.destination}} </a></th>
-                      <td><a href="/join/{{otherGroup.id}}">Join</a></td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
+            <div class="dashboard-content">
+                Your Group schedules
+                <table class="table table-sgrouped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Group</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for group in groups %}
+                        <tr>
+                            <th scope="row"><a href="groups/destination/{{group.id}}">{{group.destination}}</a></th>
+                            <td>{{group.description}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
                 </table>
 
+
+                Other User's group Plan
+                <table class="table table-sgrouped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Admin</th>
+                            <th scope="col">Group</th>
+                            <th scope="col">Do You Want To Join?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for otherGroup in otherGroups %}
+                        <tr>
+                            <th scope="row">{{otherGroup.planner.name}}</th>
+                            <th><a href="groups/destination/{{otherGroup.id}}"> {{otherGroup.destination}} </a></th>
+                            <td><a href="/join/{{otherGroup.id}}">Join</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+
+
+
+            <div class="header">
+                <span class="header-section-1">
+
+                </span>
+                <span class="header-section-2"></span>
+                <span class="header-section-3">
+                    <a href="/groups/add">Add Group</a>
+                </span>
+
+            </div>
         </div>
-
-
-
-    <div class="header">
-        <span class="header-section-1">
-
-        </span>
-        <span class="header-section-2"></span>
-        <span class="header-section-3">
-            <a href="/groups/add">Add Group</a>
-        </span>
-
     </div>
-    </div>
+    <div class="main-section dark">
+        <div class="w-container">
+            <div class="section-heading">
+                <h2 class="white">Stay in Touch</h2>
+                <div class="med-divider"></div>
+            </div>
+            <div class="form-wrapper w-form">
+                <form id="email-form" name="email-form" data-name="Email Form" class="w-clearfix"><input type="email"
+                        id="email" name="email" data-name="Email" placeholder="Enter your email address" maxlength="256"
+                        required="" class="field w-input" /><input type="submit" value="Submit"
+                        data-wait="Please wait..." class="submit-button w-button" /></form>
+                <div class="success-message w-form-done">
+                    <p>Thank you! Your submission has been received!</p>
+                </div>
+                <div class="w-form-fail">
+                    <p>Oops! Something went wrong while submitting the form</p>
+                </div>
+            </div>
         </div>
-        <div class="main-section dark">
+        <div class="footer-section">
             <div class="w-container">
-                <div class="section-heading">
-                    <h2 class="white">Stay in Touch</h2>
-                    <div class="med-divider"></div>
-                </div>
-                <div class="form-wrapper w-form">
-                    <form id="email-form" name="email-form" data-name="Email Form" class="w-clearfix"><input
-                            type="email" id="email" name="email" data-name="Email"
-                            placeholder="Enter your email address" maxlength="256" required=""
-                            class="field w-input" /><input type="submit" value="Submit" data-wait="Please wait..."
-                            class="submit-button w-button" /></form>
-                    <div class="success-message w-form-done">
-                        <p>Thank you! Your submission has been received!</p>
-                    </div>
-                    <div class="w-form-fail">
-                        <p>Oops! Something went wrong while submitting the form</p>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-section">
-                <div class="w-container">
-                    <div class="w-row">
-                        <div class="w-col w-col-4 w-col-small-4"><a href="/" aria-current="page"
-                                class="footer-logo w-inline-block w--current">
-                                {% load static %}
-                                <img src="{% static 'logo.png'%}" alt="logo">
-                            </a></div>
-                        <div class="footer-links w-col w-col-8 w-col-small-8"><a href="/" aria-current="page"
-                                class="footer-link w--current">Home</a><a href="/categories"
-                                class="footer-link">Categories</a><a href="/about" class="footer-link">About</a><a
-                                href="/contact" class="footer-link">Contact</a></div>
-                    </div>
+                <div class="w-row">
+                    
+                    <div class="footer-links w-col w-col-8 w-col-small-8"><a href="/" aria-current="page"
+                            class="footer-link w--current">Home</a><a href="/categories"
+                            class="footer-link">Categories</a><a href="/about" class="footer-link">About</a><a
+                            href="/contact" class="footer-link">Contact</a></div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=5e4b1929fccc7f2575de825e"
         type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="

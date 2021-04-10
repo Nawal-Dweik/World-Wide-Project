@@ -8,3 +8,6 @@
     font-size: 22px;
     font-weight: 600;
 }
+a.w-webflow-badge {
+    display: none !important;
+}
