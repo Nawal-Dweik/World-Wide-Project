@@ -90,11 +90,11 @@ def view_destination(request,group_id):
     current_group = models.selected_group(group_id)
     context = {
         'destination': current_group.destination,
-        'planner': current_group.planner.name,
+        'planner': current_group.planner.first_name,
         'plannerId': current_group.planner.id,
         'description': current_group.description,
         'groupUsers': models.users_joining_the_group(request.session['login_user'],group_id)
 
     }
 
-    return render(request,"destination.html",context)
+    return render(request,"group.html",context)
