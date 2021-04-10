@@ -16,6 +16,13 @@ class BlogManager(models.Manager):
             errors['email'] = "Invalid email address!"
         return errors
 
+class MessageManager(models.Manager):
+    def msg_basic_validator(self, postData):
+        errors = {}
+        if len(postData['content']) < 1:
+            errors["content"] = "Content should be at least 1 characters"
+        return errors
+
 class User(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
@@ -24,20 +31,6 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = BlogManager()
-
-class Message(models.Model):
-    context = models.TextField()
-    sender_id = models.ForeignKey(User, related_name= 'messages_sent', on_delete = models.CASCADE )
-    recipient_id = models.ForeignKey(User, related_name= 'messages_received', on_delete = models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-def addMessage(msg_info,user_id):
-    context = msg_info['content']
-    sender_id = User.objects.get(id=user_id)
-    Message.objects.create(context=context,sender_id=sender_id)
-    Message.objects.last()
-    return Message1
 
 
     ################################################################################################
@@ -49,6 +42,22 @@ class Group(models.Model):
     users = models.ManyToManyField(User, related_name="groups")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Message(models.Model):
+    context = models.TextField()
+    sender = models.ForeignKey(User, related_name= 'messages_sent', on_delete = models.CASCADE )
+    group = models.ForeignKey(Group, related_name= 'messages_group', on_delete = models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = MessageManager()
+
+def addMessage(msg_info,user_id,group_id):
+    context = msg_info['content']
+    sender = User.objects.get(id=user_id)
+    group = Group.objects.get(id=group_id)
+    Message.objects.create(context=context,sender=sender, group=group)
+    Message.objects.last()
+    return Message1
 
 def addGroup(postedRequest, currentUserId):
     destination = postedRequest['destination']
@@ -80,3 +89,7 @@ def users_joining_the_group(user_id,group_id):
     this_group = Group.objects.get(id=group_id)
     allGroupJoiners = User.objects.filter(groups=this_group)
     return allGroupJoiners
+
+def msg_errors(check_info):
+    errors = Message.objects.msg_basic_validator(check_info)
+    return errors

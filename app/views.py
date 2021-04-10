@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import User, Message, Group
 from . import models
+from django.contrib import messages
 
 def index(request):
     return render(request,"home.html")
@@ -53,15 +54,17 @@ def editAccount(request):
 def dashboard(request):
     return render(request, 'dashboard.html')
 
-def add_msg(request):
+def add_msg(request, group_id):
+    print("message views")
     if request.method =='POST':
-        errors = models.posts_errors(request.POST)
+        errors = models.msg_errors(request.POST)
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
             return redirect('/')
         else:
-            msg = models.addMessage(request.POST,request.session['user_id'])
+            msg = models.addMessage(request.POST,request.session['login_user'], group_id)
+            print("message views")
             if msg is not None:
                 return redirect('/dashboard')
     return redirect('/dashboard')
