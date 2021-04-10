@@ -73,21 +73,7 @@
 
                     <div class="message-chat">
                         <div class="chat-body">
-                            <div class="message info">
-                                <img alt="" class="img-circle medium-image" src="/static/avatar.jpg">
-
-                                <div class="message-body">
-                                    <div class="message-info">
-                                        <h4> Elon Musk </h4>
-                                        <h5> <i class="fa fa-clock-o"></i> 2:25 PM </h5>
-                                    </div>
-                                    <hr>
-                                    <div class="message-text">
-                                        I've seen your new template, Dauphin, it's amazing !
-                                    </div>
-                                </div>
-                                <br>
-                            </div>
+                          
 
                             
 
@@ -134,8 +120,12 @@
                             <form action="/groups/addMsg/{{group_id}}" method="POST">
                                 {% csrf_token %}
                                 <div class="chat-footer"></div>
-                                <input type="text" class="send-message-text" id="content" name="content" >
-                                <input type="submit" value="Add" class="btn btn-primary">
+                                <div class="chat-footer new-message-textarea">
+                                <textarea style="height: 35px !important;" type="text" class="send-message-text" id="content" name="content" ></textarea>
+                                <!-- <input type="submit" value="Add" class="btn btn-primary"> -->
+                                <button type="submit" class="send-message-button btn-info"> <i class="fa fa-send"></i>
+                                </button>
+                                </div>
                                 <!-- <label class="upload-file">
                                 <input type="file" required="">
                                 <i class="fa fa-paperclip"></i>
