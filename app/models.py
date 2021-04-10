@@ -32,6 +32,9 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = BlogManager()
 
+    def __str__(self):
+        return self.first_name + " " + self.last_name
+
 
     ################################################################################################
 
@@ -43,6 +46,9 @@ class Group(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.group_name
+
 class Message(models.Model):
     context = models.TextField()
     sender = models.ForeignKey(User, related_name= 'messages_sent', on_delete = models.CASCADE )
@@ -50,6 +56,9 @@ class Message(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = MessageManager()
+
+    def __str__(self):
+        return self.context
 
 def addMessage(msg_info,user_id,groupId):
     context = msg_info['content']

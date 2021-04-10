@@ -138,3 +138,7 @@ label {
 a.w-webflow-badge {
     display: none !important;
 }
+
+table a {
+    color: #ffc107 !important;
+}
