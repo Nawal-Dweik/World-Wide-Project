@@ -89,25 +89,27 @@
                                 <br>
                             </div>
 
-                            <div class="message my-message">
-
-
-                                <div class="message-body">
-                                    <div class="message-body-inner">
-                                        <div class="message-info">
-                                            <h4> Dennis Novac </h4>
-                                            <h5> <i class="fa fa-clock-o"></i> 2:28 PM </h5>
-                                        </div>
-                                        <hr>
-                                        <div class="message-text">
-                                            Thanks, I think I will use this for my next dashboard system.
-                                        </div>
-                                    </div>
-                                </div>
-                                <br>
-                            </div>
+                            
 
 {% for message in messages %}
+{% if message.sender.id == request.session.login_user %}
+<div class="message my-message">
+    <div class="message-body">
+        <div class="message-body-inner">
+            <div class="message-info">
+                <h4> {{message.sender.first_name}}  {{message.sender.last_name}} </h4>
+                <h5> <i class="fa fa-clock-o"></i> {{message.created_at}} </h5>
+            </div>
+            <hr>
+            <div class="message-text">
+                {{message.context}}
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+{% endif %}
+{% if message.sender.id != request.session.login_user %}
                             <div class="message info">
                                 <img alt="" class="img-circle medium-image" src="/static/avatar.jpg">
 
@@ -123,6 +125,7 @@
                                 </div>
                                 <br>
                             </div>
+                            {% endif %}
 
                             {% endfor %}
                         </div>
