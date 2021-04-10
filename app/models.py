@@ -37,7 +37,7 @@ class User(models.Model):
 
 class Group(models.Model):
     planner = models.ForeignKey(User, related_name="groupsPlannedByUser", on_delete = models.CASCADE)
-    destination = models.TextField()
+    groupName = models.TextField()
     description = models.TextField()
     users = models.ManyToManyField(User, related_name="groups")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -51,19 +51,19 @@ class Message(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = MessageManager()
 
-def addMessage(msg_info,user_id,group_id):
+def addMessage(msg_info,user_id,groupId):
     context = msg_info['content']
     sender = User.objects.get(id=user_id)
-    group = Group.objects.get(id=group_id)
+    group = Group.objects.get(id=groupId)
     Message.objects.create(context=context,sender=sender, group=group)
     Message.objects.last()
-    return Message1
+    return Message
 
 def addGroup(postedRequest, currentUserId):
-    destination = postedRequest['destination']
+    groupName = postedRequest['groupName']
     description = postedRequest['description']
     this_user = User.objects.get(id= currentUserId)
-    this_group = Group.objects.create(destination=destination,description=description, planner=this_user)
+    this_group = Group.objects.create(groupName=groupName,description=description, planner=this_user)
     this_user.groups.add(this_group)
 
 def all_groups_for_user(id):

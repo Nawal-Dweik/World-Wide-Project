@@ -89,10 +89,10 @@ def joinGroup(request,group_id):
     models.join(request.session['login_user'], group_id)
     return redirect('/groups')
 
-def view_destination(request,group_id):
+def view_groupName(request,group_id):
     current_group = models.selected_group(group_id)
     context = {
-        'destination': current_group.destination,
+        'groupName': current_group.groupName,
         'planner': current_group.planner.first_name,
         'plannerId': current_group.planner.id,
         'description': current_group.description,
