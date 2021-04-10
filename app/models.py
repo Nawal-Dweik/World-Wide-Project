@@ -37,7 +37,7 @@ class User(models.Model):
 
 class Group(models.Model):
     planner = models.ForeignKey(User, related_name="groupsPlannedByUser", on_delete = models.CASCADE)
-    groupName = models.TextField()
+    group_name = models.TextField()
     description = models.TextField()
     users = models.ManyToManyField(User, related_name="groups")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -60,10 +60,10 @@ def addMessage(msg_info,user_id,groupId):
     return Message
 
 def addGroup(postedRequest, currentUserId):
-    groupName = postedRequest['groupName']
+    group_name = postedRequest['group_name']
     description = postedRequest['description']
     this_user = User.objects.get(id= currentUserId)
-    this_group = Group.objects.create(groupName=groupName,description=description, planner=this_user)
+    this_group = Group.objects.create(group_name=group_name,description=description, planner=this_user)
     this_user.groups.add(this_group)
 
 def all_groups_for_user(id):

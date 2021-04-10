@@ -63,7 +63,7 @@
                     <tbody>
                         {% for group in groups %}
                         <tr>
-                            <th scope="row"><a href="groups/groupName/{{group.id}}">{{group.groupName}}</a></th>
+                            <th scope="row"><a href="groups/group_name/{{group.id}}">{{group.group_name}}</a></th>
                             <td>{{group.description}}</td>
                         </tr>
                         {% endfor %}
@@ -84,7 +84,7 @@
                         {% for otherGroup in otherGroups %}
                         <tr>
                             <th scope="row">{{otherGroup.planner.first_name}}</th>
-                            <th><a href="groups/groupName/{{otherGroup.id}}"> {{otherGroup.groupName}} </a></th>
+                            <th><a href="groups/group_name/{{otherGroup.id}}"> {{otherGroup.group_name}} </a></th>
                             <td><a href="/join/{{otherGroup.id}}">Join</a></td>
                         </tr>
                         {% endfor %}

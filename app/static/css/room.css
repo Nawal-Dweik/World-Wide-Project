@@ -94,7 +94,7 @@ output {
 }
 
 span.header-section-3 a,
-.show-groupName output {
+.show-group_name output {
     font-size: 1.5em !important;
 }
 

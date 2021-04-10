@@ -16,7 +16,7 @@ urlpatterns = [
     path('groups', views.groupDashboard),
     path('groups/add', views.addGroup),
     path('join/<int:group_id>', views.joinGroup),
-    path('groups/groupName/<int:group_id>', views.view_groupName),
+    path('groups/group_name/<int:group_id>', views.view_group_name),
 
     path('groups/addMsg/<int:group_id>', views.add_msg),
    

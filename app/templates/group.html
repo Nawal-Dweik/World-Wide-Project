@@ -18,7 +18,7 @@
         <div class="panel messages-panel">
             <div class="contacts-list">
                 <div class="inbox-categories">
-                    <div data-toggle="tab" data-target="#inbox" class="active"> {{groupName}} </div>
+                    <div data-toggle="tab" data-target="#inbox" class="active"> {{group_name}} </div>
 
                 </div>
                 <div class="tab-content">
@@ -126,7 +126,7 @@
                         </div>
 
                         
-                            <form action="/groups/addMsg/2" method="POST">
+                            <form action="/groups/addMsg/{{group_id}}" method="POST">
                                 {% csrf_token %}
                                 <div class="chat-footer"></div>
                                 <input type="text" class="send-message-text" id="content" name="content" >

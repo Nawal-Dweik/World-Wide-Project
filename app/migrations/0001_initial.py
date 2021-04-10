@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name='Group',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('groupName', models.TextField()),
+                ('destination', models.TextField()),
                 ('description', models.TextField()),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('group', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='messages_group', to='app.Group')),
-                ('sender', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='messages_sent', to='app.User')),
+                ('sender_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='messages_sent', to='app.User')),
             ],
         ),
         migrations.AddField(
