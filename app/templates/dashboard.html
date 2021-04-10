@@ -25,18 +25,7 @@
 
 <body>
     <div>
-        <div data-collapse="tiny" data-animation="over-right" data-duration="400" role="banner" class="navbar w-nav">
-            <div class="w-container">
-                {% load static %}
-                <img src="{% static 'logo.png'%}" alt="logo" width="80px">
-                
-                <nav role="navigation" class="nav-menu w-nav-menu">welcome, </nav>
-                <div class="menu-button w-hidden-main w-hidden-medium w-hidden-small w-clearfix w-nav-button">
-                    <div class="menu-icon w-icon-nav-menu"></div>
-                    <div class="menu-link">MENU</div>
-                </div>
-            </div>
-        </div>
+       
         <div class="hero-section">
             
         </div>
@@ -48,6 +37,9 @@
                                 href="/groups" class="category-link">Rooms</a></div>
                         <div role="listitem" class="category-wrapper w-dyn-item w-col w-col-2"><a
                                 href="/groups/add" class="category-link">New Room</a></div>
+                                <div role="list" class="w-clearfix w-dyn-items w-row">
+                                    <div class="category-wrapper w-dyn-item w-col w-col-2" style="white-space: nowrap; padding-left: 50%;"><img src="{% static 'logo.png'%}" alt="logo" width="40px" style="max-width: none;"> Welcome, {{request.session.name}} !    <a href="/logout">Logout</a></a></div>
+                                </div>
                     </div>
                 </div>
             </div>
