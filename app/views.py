@@ -65,9 +65,10 @@ def add_msg(request, group_id):
         else:
             msg = models.addMessage(request.POST,request.session['login_user'], group_id)
             print("message views")
+            g_id = str(group_id) 
             if msg is not None:
-                return redirect('/dashboard')
-    return redirect('/dashboard')
+                return redirect('/groups/group_name/'+ g_id)
+    return redirect('/groups/group_name/'+ g_id)
 
 ##############################################################################################################
 
