@@ -91,9 +91,11 @@ def joinGroup(request,group_id):
 
 def view_group_name(request,group_id):
     current_group = models.selected_group(group_id)
+    messages = Message.objects.filter(group=current_group)
     context = {
         'group_name': current_group.group_name,
         'group_id': current_group.id,
+        'messages': messages,
         'planner': current_group.planner.first_name,
         'plannerId': current_group.planner.id,
         'description': current_group.description,

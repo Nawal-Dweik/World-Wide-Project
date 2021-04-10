@@ -107,22 +107,24 @@
                                 <br>
                             </div>
 
+{% for message in messages %}
                             <div class="message info">
                                 <img alt="" class="img-circle medium-image" src="/static/avatar.jpg">
 
                                 <div class="message-body">
                                     <div class="message-info">
-                                        <h4> Elon Musk </h4>
-                                        <h5> <i class="fa fa-clock-o"></i> 2:32 PM </h5>
+                                        <h4> {{message.sender.first_name}}  {{message.sender.last_name}}</h4>
+                                        <h5> <i class="fa fa-clock-o"></i> {{message.created_at}} </h5>
                                     </div>
                                     <hr>
                                     <div class="message-text">
-                                        Hah, too late, I already bought it and my team is impleting the new design right
-                                        now.
+                                        {{message.context}}
                                     </div>
                                 </div>
                                 <br>
                             </div>
+
+                            {% endfor %}
                         </div>
 
                         
