@@ -3,7 +3,7 @@
 
 Website structure:
 1. Home page:
-![home](https://github.com/Nawal-Dweik/MERN_Project/blob/master/screenshots/1.PNG)
+![home](https://github.com/Nawal-Dweik/World-Wide-Project/tree/master/screenshots/1.PNG)
 3. Login & Registration:
 4. Rooms Dashboard:
 5. Add a Room:
