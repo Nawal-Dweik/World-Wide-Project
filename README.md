@@ -3,9 +3,14 @@
 
 Website structure:
 1. Home page:
-![home](https://github.com/Nawal-Dweik/MERN_Project/blob/master/screenshots/1.PNG)
+![home](https://github.com/Nawal-Dweik/World-Wide-Project/blob/master/screenshots/1.JPG)
 3. Login & Registration:
-4. Rooms Dashboard:
-5. Add a Room:
-6. Conversation Room Page:
+![login](https://github.com/Nawal-Dweik/World-Wide-Project/blob/master/screenshots/2.JPG)
+![registration](https://github.com/Nawal-Dweik/World-Wide-Project/blob/master/screenshots/7.JPG)
+5. Rooms Dashboard:
+![allRooms](https://github.com/Nawal-Dweik/World-Wide-Project/blob/master/screenshots/4.JPG)
+7. Add a Room:
+![newRoom](https://github.com/Nawal-Dweik/World-Wide-Project/blob/master/screenshots/5.JPG)
+9. Conversation Room Page:
+![chat](https://github.com/Nawal-Dweik/World-Wide-Project/blob/master/screenshots/6.JPG)
 
