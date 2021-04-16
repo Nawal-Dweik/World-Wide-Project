@@ -1,0 +1,269 @@
+var $vote_widget = $('.section-vote'), $breaking_container = null, $breaking_news_array = [],
+    $current_breaking_index = 0, $time_zone = null;
+moment.locale('ar');
+$(document).ready(function () {
+    $time_zone = $('#time_zone').val()
+    window.$breaking_container = $('.section-breaking');
+    timeAgo();
+    var $app = $('#page_app'),
+      $id = $('#page_id');
+    if ($app.length && $id.length) {
+        $.ajax({
+            type: "GET",
+            url: site_url + '/v/' + $app.val() + '/' + $id.val(),
+        });
+    }
+    /*submit ajax form*/
+    $(document).on('submit', 'form.ajax-form', function ($e) {
+        $e.preventDefault();
+        submit_form($(this));
+    });
+    /*load weather*/
+    if ($('#weather').length) {
+        $.ajax({
+            type: "GET",
+            url: site_url + '/ajax/load-weather',
+            success: function ($response) {
+                $('#weather').html($response)
+            },
+            dataType: 'HTML'
+        });
+    }
+    /*breaking news*/
+    update_breaking()
+    show_breaking()
+    window.setInterval(function () {
+        update_breaking();
+    }, 10000);
+    window.setInterval(function () {
+        show_breaking();
+    }, 5000);
+    $('.form-validate').validate({
+        errorPlacement: function (error, element) {
+            // Append error within linked label
+            $(element)
+                .closest(".form-group").addClass('has-error')
+                .next('.form-control-message')
+                .append(error);
+        },
+        success: function (success, element) {
+            $(element).closest(".form-group").removeClass('has-error').addClass("has-success");
+            $(element).closest('form').find('.alert').removeClass('hide');
+        }
+    });
+});
+function load_vote() {
+    $('.widget-vote').addClass('loading');
+    $.ajax({
+        type: "POST",
+        url: site_url + '/ajax/load-vote',
+        success: function ($response) {
+            $('.widget-vote .widget-body').html($response)
+            $('.widget-vote').removeClass('loading');
+        },
+        dataType: 'HTML'
+    });
+}
+$(document).on('submit', '#vote_form', function ($e) {
+    $e.preventDefault();
+    var $this = $(this);
+    $('.widget-vote').addClass('loading')
+    $('.widget-vote button.button').attr('disabled', true);
+    $.ajax({
+        type: "POST",
+        url: site_url + '/ajax/answer-vote',
+        data: $this.serialize(),
+        success: function ($response) {
+            $('.widget-vote .widget-body').html($response)
+        }, complete: function () {
+            $('.widget-vote').removeClass('loading');
+        },
+        dataType: 'HTML'
+    });
+});
+
+function template($view, $ob) {
+    temp = $('#' + $view).text().toString();
+    $.each($ob, function ($k, $r) {
+        temp = temp.split("{{" + $k + "}}").join($r);
+    });
+    return temp;
+}
+
+function dd($var) {
+    console.log($var)
+}
+
+function array_pluck($array, $key) {
+    return $.map($array, function ($e) {
+        return $e[$key];
+    })
+}
+
+function array_diff(a1, a2) {
+    var a = [], diff = [];
+    for (var i = 0; i < a1.length; i++) {
+        a[a1[i]] = true;
+    }
+    for (var i = 0; i < a2.length; i++) {
+        if (a[a2[i]]) {
+            delete a[a2[i]];
+        } else {
+            a[a2[i]] = true;
+        }
+    }
+    for (var k in a) {
+        diff.push(k);
+    }
+    return diff;
+};
+
+function update_breaking() {
+    $.ajax({
+        type: "GET",
+        url: site_url + '/ajax/breaking',
+        success: function ($response) {
+            if ($response.status == 'success') {
+                if ($response.data.length) {
+                    var $response_data = [];
+                    $.each($response.data, function ($i, $r) {
+                        if (!moment.tz($r.expired_at, "YYYY-MM-DD HH:mm:ss", $time_zone).isBefore()) {
+                            $response_data.push($r)
+                        }
+                    });
+                    var $has_new = array_diff(array_pluck($response_data, 'id'), array_pluck($breaking_news_array, 'id')).length > 0;
+                    window.$breaking_news_array = $response_data;
+                    if ($has_new) {
+                        $('#breaking_audio').trigger('play');
+                    }
+                }else{
+                    window.$breaking_news_array = [];
+                }
+                show_breaking();
+            }
+        },
+        dataType: 'JSON'
+    });
+}
+
+function show_breaking() {
+    if ($breaking_news_array.length > 0) {
+        $breaking_container.fadeIn();
+        var $record = $breaking_news_array[(window.$current_breaking_index++) % $breaking_news_array.length]
+        $breaking_container.find('.content .entry-box-title').fadeOut(300, function () {
+            $breaking_container.find('.content .entry-box-title .title').text($record.title);
+            $breaking_container.find('.content .entry-box-title .time').text($record.time);
+            $breaking_container.find('.content .entry-box-title .a').attr('href', $record.link);
+            $breaking_container.find('.content .entry-box-title').fadeIn(300);
+        });
+    } else {
+        $breaking_container.fadeOut();
+    }
+}
+function submit_form($form) {
+    if ($form.hasClass('form-validate') && $form.valid() || !$form.hasClass('form-validate')) {
+        $.ajax({
+            type: $form.attr('method'),
+            url: $form.attr('action'),
+            data: $form.serialize(),
+            success: function ($response) {
+                alert($response.msg)
+                // $.fancybox.open('<div class="message paltoday-popup">' + $response.msg + '</div>');
+                // $.fancybox.open('  <div id="paltoday-popup" class="paltoday-popup" style="direction: rtl;min-width:350px;padding: 12px 20px;">\n' +
+                //     '    <div class="message paltoday-popup">\n' +
+                //     '      <h2 class="title">شكرا...</h2>\n' +
+                //     '      <p class="message-text m-0">' + $response.msg + '</p>\n' +
+                //     '    </div>\n' +
+                //     '  </div>\n', {
+                //     btnTpl: {
+                //         smallBtn: '<button data-fancybox-close="" class="fancybox-close col-auto" title="Close"></button>'
+                //     }
+                // });
+                // alert($response.msg)
+                if ($response.status == 'success') {
+                    $form[0].reset();
+                } else {
+                }
+            },
+            dataType: 'JSON'
+        });
+    }
+}
+
+// atyaf notify
+function notify(Class, header, text) {
+    var $headerTitle = '';
+    if (header != '') {
+        $headerTitle = '<h6 class="notify-header">' + header + '</h6>';
+    }
+    var $html = '<div class="notify-item ' + Class + '" data-notify-id=""><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button> ' + $headerTitle + ' <p>' + text + '</p> </div>';
+    $('.atyaf-notify').append($html).find('.notify-item').delay(4000).fadeOut();
+}
+
+$(function () {
+    $(document).on('click', '.atyaf-notify .notify-item .close', function () {
+        $(this).closest('.notify-item').fadeOut('fast');
+    });
+})
+
+function timeAgo() {
+    var templates = {
+        seconds: "منذ اقل من دقيقة",
+        minute: "منذ دقيقة",
+        two_minutes: "منذ دقيقتين",
+        minutes: "منذ {d} دقائق",
+        more_minutes: "منذ {d} دقيقة",
+        hour: "منذ ساعة",
+        hours: " منذ {d} ساعات",
+        day: "منذ يوم",
+        two_days: "منذ يومين",
+        days: "منذ {d} أيام",
+        month: "منذ شهر",
+        months: "منذ {d} أشهر",
+        year: "منذ سنة",
+        years: "منذ {d} سنوات"
+    };
+    var template = function (t, n) {
+        return templates[t].replace('{d}', Math.abs(Math.round(n)));
+    };
+    var timer = function ($time) {
+        if (!$time)
+            return;
+        // $time = new Date($time * 1000);
+        var $now = moment().unix();
+        var $seconds = ($now - $time);
+        var $minutes = $seconds / 60;
+        var $hours = $minutes / 60;
+        var $days = $hours / 24;
+        var $years = $days / 365;
+        if ($seconds < 45)
+            return template('seconds', $seconds);
+        if ($seconds < 90)
+            return template('minute', 1);
+        if ($minutes < 3)
+            return template('two_minutes', $minutes);
+        if ($minutes < 10)
+            return template('minutes', $minutes);
+        if ($minutes < 45)
+            return template('more_minutes', $minutes);
+        if ($minutes < 90)
+            return template('hour', 1);
+        if ($minutes < 165)
+            return template('two_hours', 2);
+        if ($hours < 24)
+            return template('hours', $hours);
+        if ($hours < 42)
+            return template('day', 1);
+        if ($days < 3)
+            return template('two_days', $days);
+        return moment.unix($time).format("H:mm Do MMMM YYYY");
+    };
+    var elements = $('[data-time]');
+    elements.each(function (k, $item) {
+        var $this = $($item),
+            $time = parseFloat($this.attr('data-time'));
+        $this.attr('data-time', $time)
+        $this.text(timer($time))
+    })
+    setTimeout(timeAgo, 1200000);
+}
